@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">DoingSplits</string>
-    <string name="title_activity_split">SplitActivity</string>
+    <string name="app_name">Doing Splits</string>
+    <string name="title_activity_split">Splits</string>
+    <string name="title_activity_games_list">Games</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="action_add">Add Game</string>
 </resources>
