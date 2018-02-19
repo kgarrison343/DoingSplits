@@ -2,6 +2,7 @@ package kgarrison.doingsplits;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,8 +14,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.garrison_enterprises.apiaccess.SpeedRunAccess;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import models.Game;
 
@@ -60,7 +64,7 @@ public class GamesListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_add:
-                getNewGame();
+                getNewGame("VVVVVV");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -73,7 +77,28 @@ public class GamesListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getNewGame(){
+    public void getNewGame(String title){
 
+        List<com.garrison_enterprises.apiaccess.Game> games = null;
+        try {
+            games = new FetchGamesTask().execute(title).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for (com.garrison_enterprises.apiaccess.Game game : games){
+            Game newGame = new Game(game.abbreviation, "");
+        }
+    }
+
+    private static class FetchGamesTask extends AsyncTask<String, Void, List<com.garrison_enterprises.apiaccess.Game>>{
+
+        @Override
+        protected List<com.garrison_enterprises.apiaccess.Game> doInBackground(String... titles) {
+            SpeedRunAccess access = new SpeedRunAccess();
+            return access.FetchGames(titles[0]);
+        }
     }
 }

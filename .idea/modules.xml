@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/APIAccess/APIAccess.iml" filepath="$PROJECT_DIR$/APIAccess/APIAccess.iml" />
       <module fileurl="file://$PROJECT_DIR$/DoingSplits.iml" filepath="$PROJECT_DIR$/DoingSplits.iml" />
-      <module fileurl="file://C:\Users\kgarr\AndroidStudioProjects\DoingSplits\DoingSplits.iml" filepath="C:\Users\kgarr\AndroidStudioProjects\DoingSplits\DoingSplits.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\kgarr\AndroidStudioProjects\DoingSplits\app\app.iml" filepath="C:\Users\kgarr\AndroidStudioProjects\DoingSplits\app\app.iml" />
     </modules>
   </component>
 </project>
