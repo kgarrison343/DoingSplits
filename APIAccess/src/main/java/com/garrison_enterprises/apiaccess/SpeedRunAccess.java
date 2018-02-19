@@ -30,7 +30,7 @@ public class SpeedRunAccess {
     }
 
     public SpeedRunAccess() {
-        Gson gson = new GsonBuilder().setLenient().create();
+        Gson gson = new GsonBuilder().create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BaseUrl)

@@ -89,7 +89,7 @@ public class GamesListActivity extends AppCompatActivity {
         }
 
         for (com.garrison_enterprises.apiaccess.Game game : games){
-            Game newGame = new Game(game.abbreviation, "");
+            Game newGame = new Game(game.names.international, "");
         }
     }
 
