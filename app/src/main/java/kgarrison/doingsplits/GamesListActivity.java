@@ -6,13 +6,18 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.garrison_enterprises.apiaccess.SpeedRunAccess;
 
@@ -51,6 +56,20 @@ public class GamesListActivity extends AppCompatActivity {
                 openSplit(view);
             }
         });
+
+        final TextView searchTitle = (TextView) findViewById(R.id.searchTitle);
+        searchTitle.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP){
+                    getNewGame(searchTitle.getText().toString());
+                    return false;
+                }
+
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -64,7 +83,7 @@ public class GamesListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_add:
-                getNewGame("VVVVVV");
+                dropTitleTextBox();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -77,7 +96,33 @@ public class GamesListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getNewGame(String title){
+    public void dropTitleTextBox(){
+        GridLayout grid = (GridLayout) findViewById(R.id.dropBox);
+        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.slide_down_animation);
+
+        slideDown.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                GridLayout grid = (GridLayout) findViewById(R.id.dropBox);
+                grid.setY(grid.getHeight() + grid.getY());
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        grid.startAnimation(slideDown);
+    }
+
+    public void getNewGame(String title) {
 
         List<com.garrison_enterprises.apiaccess.Game> games = null;
         try {

@@ -31,5 +31,29 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+    </ListView>
+
+    <GridLayout
+        android:id="@+id/dropBox"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/games"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/searchTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="@string/enter_title"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+    </GridLayout>
+
 </android.support.constraint.ConstraintLayout>

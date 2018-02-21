@@ -6,4 +6,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="action_add">Add Game</string>
+    <string name="enter_title">Enter Title…</string>
 </resources>
