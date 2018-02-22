@@ -3,10 +3,12 @@ package com.garrison_enterprises.apiaccess;
  * Created by Kyle Garrison on 2/19/2018.
  */
 
-class GamesData {
-    public final Game[] data;
+import java.util.List;
 
-    GamesData(Game[] data) {
+class GamesData {
+    public final List<Game> data;
+
+    GamesData(List<Game> data) {
         this.data = data;
     }
 }

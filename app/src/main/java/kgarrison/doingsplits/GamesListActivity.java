@@ -90,13 +90,13 @@ public class GamesListActivity extends AppCompatActivity {
         }
     }
 
-    public void openSplit(View view){
+    private void openSplit(View view){
         Intent intent = new Intent(this, SplitActivity.class);
 
         startActivity(intent);
     }
 
-    public void dropTitleTextBox(){
+    private void dropTitleTextBox(){
         GridLayout grid = (GridLayout) findViewById(R.id.dropBox);
         Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.slide_down_animation);
@@ -122,7 +122,7 @@ public class GamesListActivity extends AppCompatActivity {
         grid.startAnimation(slideDown);
     }
 
-    public void getNewGame(String title) {
+    private void getNewGame(String title) {
 
         List<com.garrison_enterprises.apiaccess.Game> games = null;
         try {
@@ -133,6 +133,7 @@ public class GamesListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        assert games != null;
         for (com.garrison_enterprises.apiaccess.Game game : games){
             Game newGame = new Game(game.names.international, "");
         }

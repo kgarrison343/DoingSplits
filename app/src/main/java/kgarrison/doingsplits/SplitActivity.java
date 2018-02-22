@@ -24,6 +24,7 @@ public class SplitActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

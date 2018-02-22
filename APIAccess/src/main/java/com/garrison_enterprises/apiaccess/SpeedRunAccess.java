@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,9 +15,10 @@ import retrofit2.http.Query;
 
 
 public class SpeedRunAccess {
+    @SuppressWarnings("FieldCanBeLocal")
     private final String BaseUrl = "https://www.speedrun.com/api/v1/";
 
-    private SpeedRun speedRun;
+    private final SpeedRun speedRun;
 
     private interface SpeedRun{
         @GET("games")
@@ -42,12 +41,8 @@ public class SpeedRunAccess {
 
     public List<Game> FetchGames(String title){
         try{
-            if(title.isEmpty()){
-                return Arrays.asList(this.speedRun.games().execute().body().data);
-            }
-            else {
-                return Arrays.asList(this.speedRun.games(title).execute().body().data);
-            }
+            GamesData result = this.speedRun.games(title).execute().body();
+            return result == null ? new ArrayList<Game>() : result.data;
         } catch (IOException e) {
             e.printStackTrace();
         }
