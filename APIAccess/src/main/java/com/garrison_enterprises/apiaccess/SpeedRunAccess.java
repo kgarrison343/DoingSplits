@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -26,6 +27,9 @@ public class SpeedRunAccess {
 
         @GET("games")
         Call<GamesData> games(@Query("name") String title);
+
+        @GET("console/{id}")
+        Call<ConsoleData> console(@Path("id") String id);
     }
 
     public SpeedRunAccess() {
@@ -42,7 +46,27 @@ public class SpeedRunAccess {
     public List<Game> FetchGames(String title){
         try{
             GamesData result = this.speedRun.games(title).execute().body();
-            return result == null ? new ArrayList<Game>() : result.data;
+            if (result == null || result.data == null) {
+                return new ArrayList<>();
+            }
+
+            List<Game> convertedGames = new ArrayList<>();
+
+            for (GameInfo game : result.data){
+                List<String> consoleNames = new ArrayList<>();
+
+                for (String id : game.platforms) {
+                    ConsoleData console = this.speedRun.console(id).execute().body();
+                    if(console == null || console.data.size() != 1){
+                        continue;
+                    }
+
+                    consoleNames.add(console.data.get(0).name);
+                }
+                convertedGames.add(new Game(game.id, game.names.international, consoleNames));
+            }
+
+            return convertedGames;
         } catch (IOException e) {
             e.printStackTrace();
         }

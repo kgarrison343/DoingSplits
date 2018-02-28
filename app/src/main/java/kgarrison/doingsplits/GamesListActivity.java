@@ -38,8 +38,8 @@ public class GamesListActivity extends AppCompatActivity {
 
         ListView lv = (ListView) findViewById(R.id.games);
         List<Game> games = new ArrayList<>();
-        games.add(new Game("Greendog: The Beached Surfer Dude!", "Sega Genesis"));
-        games.add(new Game("VVVVVV", "PC"));
+        //games.add(new Game("Greendog: The Beached Surfer Dude!", "Sega Genesis"));
+        //games.add(new Game("VVVVVV", "PC"));
 
         ArrayAdapter<Game> gameAdapter = new ArrayAdapter<>(
                 this,
@@ -117,9 +117,18 @@ public class GamesListActivity extends AppCompatActivity {
         }
 
         assert games != null;
+        ListView lv = (ListView) findViewById(R.id.games);
+        List<Game> gamesList = new ArrayList<>();
         for (com.garrison_enterprises.apiaccess.Game game : games){
-            Game newGame = new Game(game.names.international, "");
+            Game newGame = new Game(game.title, game.consoleName);
+            gamesList.add(newGame);
         }
+
+        lv.setAdapter(new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                gamesList
+        ));
     }
 
     private static class FetchGamesTask extends AsyncTask<String, Void, List<com.garrison_enterprises.apiaccess.Game>>{

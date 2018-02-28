@@ -1,19 +1,21 @@
 package models;
 
+import java.util.List;
+
 /**
  * Created by kgarrison on 2/13/2018.
  */
 
 public class Game {
     private String _name;
-    private String _console;
+    private List<String> _console;
     private Time _personalBest;
 
     public Game(){
         _personalBest = new Time();
     }
 
-    public Game(String name, String console){
+    public Game(String name, List<String> console){
         _name = name;
         _console = console;
         _personalBest = new Time();
@@ -27,11 +29,11 @@ public class Game {
         this._name = _name;
     }
 
-    public String get_console() {
+    public List<String> get_console() {
         return _console;
     }
 
-    public void set_console(String _console) {
+    public void set_console(List<String> _console) {
         this._console = _console;
     }
 
@@ -43,7 +45,8 @@ public class Game {
         this._personalBest = _personalBest;
     }
 
+    //TODO: Make to string work correctly
     public String toString(){
-        return _name + ": " + _console + " PB:" + _personalBest.toString();
+        return _name + ": " + _console.toString() + " PB:" + _personalBest.toString();
     }
 }

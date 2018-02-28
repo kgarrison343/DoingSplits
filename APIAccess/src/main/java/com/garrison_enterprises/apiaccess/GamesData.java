@@ -6,9 +6,23 @@ package com.garrison_enterprises.apiaccess;
 import java.util.List;
 
 class GamesData {
-    public final List<Game> data;
+    public final List<GameInfo> data;
 
-    GamesData(List<Game> data) {
+    GamesData(List<GameInfo> data) {
         this.data = data;
+    }
+}
+
+class GameInfo {
+    public final String id;
+    public final Names names;
+    public final String abbreviation;
+    public final String[] platforms;
+
+    public GameInfo(String id, Names names, String abbreviation, String[] platforms){
+        this.id = id;
+        this.names = names;
+        this.abbreviation = abbreviation;
+        this.platforms = platforms;
     }
 }
