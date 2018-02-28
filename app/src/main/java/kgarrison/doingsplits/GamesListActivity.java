@@ -15,7 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.GridLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import controls.SlidingGridLayout;
 import models.Game;
 
 public class GamesListActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +82,7 @@ public class GamesListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_add:
-                dropTitleTextBox();
+                animateTitleTextBox();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -96,30 +95,14 @@ public class GamesListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void dropTitleTextBox(){
-        GridLayout grid = (GridLayout) findViewById(R.id.dropBox);
-        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.slide_down_animation);
-
-        slideDown.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                GridLayout grid = (GridLayout) findViewById(R.id.dropBox);
-                grid.setY(grid.getHeight() + grid.getY());
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-        grid.startAnimation(slideDown);
+    private void animateTitleTextBox(){
+        SlidingGridLayout grid = (SlidingGridLayout) findViewById(R.id.dropBox);
+        int animationId = grid.getIsDescended() ? R.anim.slide_up_animation : R.anim.slide_down_animation;
+        Animation slideAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
+                                    animationId);
+        slideAnimation.setFillAfter(false);
+        //slideAnimation.setFillBefore(true);
+        grid.startAnimation(slideAnimation);
     }
 
     private void getNewGame(String title) {
@@ -147,4 +130,6 @@ public class GamesListActivity extends AppCompatActivity {
             return access.FetchGames(titles[0]);
         }
     }
+
+
 }
