@@ -47,6 +47,15 @@ public class Game {
 
     //TODO: Make to string work correctly
     public String toString(){
-        return _name + ": " + _console.toString() + " PB:" + _personalBest.toString();
+        StringBuilder consoles = new StringBuilder();
+
+        for (String console : _console) {
+            consoles.append(console).append(", ");
+        }
+        if (consoles.length() != 0) {
+            consoles.delete(consoles.length() - 2, consoles.length() - 1);
+        }
+
+        return _name + ": " + consoles.toString() + " PB:" + _personalBest.toString();
     }
 }

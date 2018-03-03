@@ -28,8 +28,8 @@ public class SpeedRunAccess {
         @GET("games")
         Call<GamesData> games(@Query("name") String title);
 
-        @GET("console/{id}")
-        Call<ConsoleData> console(@Path("id") String id);
+        @GET("platforms/{id}")
+        Call<ConsoleData> platforms(@Path("id") String id);
     }
 
     public SpeedRunAccess() {
@@ -56,12 +56,12 @@ public class SpeedRunAccess {
                 List<String> consoleNames = new ArrayList<>();
 
                 for (String id : game.platforms) {
-                    ConsoleData console = this.speedRun.console(id).execute().body();
-                    if(console == null || console.data.size() != 1){
+                    ConsoleData console = this.speedRun.platforms(id).execute().body();
+                    if(console == null){
                         continue;
                     }
 
-                    consoleNames.add(console.data.get(0).name);
+                    consoleNames.add(console.data.name);
                 }
                 convertedGames.add(new Game(game.id, game.names.international, consoleNames));
             }

@@ -6,9 +6,9 @@ package com.garrison_enterprises.apiaccess;
 import java.util.List;
 
 class ConsoleData {
-    public final List<ConsoleInfo> data;
+    public final ConsoleInfo data;
 
-    ConsoleData(List<ConsoleInfo> data){
+    ConsoleData(ConsoleInfo data){
         this.data = data;
     }
 }
