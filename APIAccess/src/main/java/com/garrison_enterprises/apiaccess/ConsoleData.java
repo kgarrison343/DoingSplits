@@ -3,8 +3,6 @@ package com.garrison_enterprises.apiaccess;
  * Created by Kyle Garrison on 2/27/2018.
  */
 
-import java.util.List;
-
 class ConsoleData {
     public final ConsoleInfo data;
 

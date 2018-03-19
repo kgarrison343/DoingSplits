@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Game {
     private String _name;
+    private String _id;
     private List<String> _console;
     private Time _personalBest;
 
@@ -15,8 +16,9 @@ public class Game {
         _personalBest = new Time();
     }
 
-    public Game(String name, List<String> console){
+    public Game(String name, String id, List<String> console){
         _name = name;
+        set_id(id);
         _console = console;
         _personalBest = new Time();
     }
@@ -45,6 +47,14 @@ public class Game {
         this._personalBest = _personalBest;
     }
 
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
     //TODO: Make to string work correctly
     public String toString(){
         StringBuilder consoles = new StringBuilder();
@@ -58,4 +68,6 @@ public class Game {
 
         return _name + ": " + consoles.toString() + " PB:" + _personalBest.toString();
     }
+
+
 }

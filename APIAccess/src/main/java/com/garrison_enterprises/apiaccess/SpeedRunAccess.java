@@ -30,6 +30,9 @@ public class SpeedRunAccess {
 
         @GET("platforms/{id}")
         Call<ConsoleData> platforms(@Path("id") String id);
+
+        @GET("games/{id}/categories")
+        Call<CategoryData> categories(@Path("id") String id);
     }
 
     public SpeedRunAccess() {
@@ -71,6 +74,15 @@ public class SpeedRunAccess {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+    public CategoryData FetchCategories(String gameId){
+        try {
+            return this.speedRun.categories(gameId).execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

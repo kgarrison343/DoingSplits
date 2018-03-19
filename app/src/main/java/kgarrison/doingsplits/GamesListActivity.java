@@ -52,7 +52,8 @@ public class GamesListActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                openSplit(view);
+                Game selectedGame = (Game)parent.getAdapter().getItem(position);
+                openCategories(selectedGame);
             }
         });
 
@@ -89,9 +90,9 @@ public class GamesListActivity extends AppCompatActivity {
         }
     }
 
-    private void openSplit(View view){
-        Intent intent = new Intent(this, SplitActivity.class);
-
+    private void openCategories(Game game){
+        Intent intent = new Intent(this, ViewCategoriesActivity.class);
+        intent.putExtra("SELECTED_GAME_ID", game.get_id());
         startActivity(intent);
     }
 
@@ -120,7 +121,7 @@ public class GamesListActivity extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.games);
         List<Game> gamesList = new ArrayList<>();
         for (com.garrison_enterprises.apiaccess.Game game : games){
-            Game newGame = new Game(game.title, game.consoleName);
+            Game newGame = new Game(game.title, game.id, game.consoleName);
             gamesList.add(newGame);
         }
 
