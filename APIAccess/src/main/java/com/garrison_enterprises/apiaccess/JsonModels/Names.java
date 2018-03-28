@@ -1,4 +1,4 @@
-package com.garrison_enterprises.apiaccess;
+package com.garrison_enterprises.apiaccess.JsonModels;
 /*
  * Created by Kyle Garrison on 2/19/2018.
  */

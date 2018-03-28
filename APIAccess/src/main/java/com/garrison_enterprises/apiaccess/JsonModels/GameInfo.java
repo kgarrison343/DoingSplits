@@ -1,19 +1,9 @@
-package com.garrison_enterprises.apiaccess;
+package com.garrison_enterprises.apiaccess.JsonModels;
 /*
- * Created by Kyle Garrison on 2/19/2018.
+ * Created by Kyle Garrison on 3/26/2018.
  */
 
-import java.util.List;
-
-class GamesData {
-    public final List<GameInfo> data;
-
-    GamesData(List<GameInfo> data) {
-        this.data = data;
-    }
-}
-
-class GameInfo {
+public class GameInfo {
     public final String id;
     public final Names names;
     public final String abbreviation;

@@ -1,5 +1,11 @@
 package com.garrison_enterprises.apiaccess;
 
+import com.garrison_enterprises.apiaccess.JsonModels.CategoryData;
+import com.garrison_enterprises.apiaccess.JsonModels.ConsoleData;
+import com.garrison_enterprises.apiaccess.JsonModels.Game;
+import com.garrison_enterprises.apiaccess.JsonModels.GameInfo;
+import com.garrison_enterprises.apiaccess.JsonModels.GamesData;
+import com.garrison_enterprises.apiaccess.JsonModels.LeaderboardData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -8,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -33,6 +40,9 @@ public class SpeedRunAccess {
 
         @GET("games/{id}/categories")
         Call<CategoryData> categories(@Path("id") String id);
+
+        @GET("leaderboards/{gameId}/category/{categoryId}")
+        Call<LeaderboardData> leaderboard(@Path("gameId") String gameId, @Path("categoryId") String categoryId);
     }
 
     public SpeedRunAccess() {
@@ -74,12 +84,24 @@ public class SpeedRunAccess {
             e.printStackTrace();
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     public CategoryData FetchCategories(String gameId){
         try {
             return this.speedRun.categories(gameId).execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public LeaderboardData FetchLeaderboard(String gameId, String categoryId){
+        try {
+            Call<LeaderboardData> call = this.speedRun.leaderboard(gameId, categoryId);
+            Response<LeaderboardData> response = call.execute();
+            LeaderboardData body = response.body();
+            return body;
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -108,7 +108,7 @@ public class GamesListActivity extends AppCompatActivity {
 
     private void getNewGame(String title) {
 
-        List<com.garrison_enterprises.apiaccess.Game> games = null;
+        List<com.garrison_enterprises.apiaccess.JsonModels.Game> games = null;
         try {
             games = new FetchGamesTask().execute(title).get();
         } catch (InterruptedException e) {
@@ -120,7 +120,7 @@ public class GamesListActivity extends AppCompatActivity {
         assert games != null;
         ListView lv = (ListView) findViewById(R.id.games);
         List<Game> gamesList = new ArrayList<>();
-        for (com.garrison_enterprises.apiaccess.Game game : games){
+        for (com.garrison_enterprises.apiaccess.JsonModels.Game game : games){
             Game newGame = new Game(game.title, game.id, game.consoleName);
             gamesList.add(newGame);
         }
@@ -132,10 +132,10 @@ public class GamesListActivity extends AppCompatActivity {
         ));
     }
 
-    private static class FetchGamesTask extends AsyncTask<String, Void, List<com.garrison_enterprises.apiaccess.Game>>{
+    private static class FetchGamesTask extends AsyncTask<String, Void, List<com.garrison_enterprises.apiaccess.JsonModels.Game>>{
 
         @Override
-        protected List<com.garrison_enterprises.apiaccess.Game> doInBackground(String... titles) {
+        protected List<com.garrison_enterprises.apiaccess.JsonModels.Game> doInBackground(String... titles) {
             SpeedRunAccess access = new SpeedRunAccess();
             return access.FetchGames(titles[0]);
         }

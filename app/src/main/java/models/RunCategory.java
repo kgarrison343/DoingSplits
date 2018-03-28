@@ -3,7 +3,7 @@ package models;
  * Created by Kyle Garrison on 3/18/2018.
  */
 
-import com.garrison_enterprises.apiaccess.CategoryInfo;
+import com.garrison_enterprises.apiaccess.JsonModels.CategoryInfo;
 
 public class RunCategory {
     public String id;
