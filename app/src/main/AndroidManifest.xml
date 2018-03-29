@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".GamesListActivity"
+            android:name=".GamesSearchActivity"
             android:label="@string/title_activity_games_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,14 +26,13 @@
         <activity
             android:name=".SplitActivity"
             android:label="@string/title_activity_split"
-            android:parentActivityName=".GamesListActivity"
+            android:parentActivityName=".GamesSearchActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="kgarrison.doingsplits.GamesListActivity" />
+                android:value="kgarrison.doingsplits.GamesSearchActivity" />
         </activity>
         <activity android:name=".ViewCategoriesActivity" />
-        <activity android:name=".LeaderboardActivity"></activity>
+        <activity android:name=".LeaderboardActivity" />
     </application>
-
 </manifest>
