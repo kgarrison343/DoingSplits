@@ -29,7 +29,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         try {
             LeaderboardData data = new FetchLeaderboardTask().execute(new LeaderboardRequest(gameId, categoryId)).get();
-            ArrayAdapter<RunData> runArrayAdapter = new ArrayAdapter<RunData>(this, android.R.layout.simple_list_item_1, data.data.runs);
+            ArrayAdapter<RunData> runArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data.data.runs);
             leaderboardList.setAdapter(runArrayAdapter);
         } catch (InterruptedException e) {
             e.printStackTrace();

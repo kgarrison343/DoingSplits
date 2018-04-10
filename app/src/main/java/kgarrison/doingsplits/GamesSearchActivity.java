@@ -3,8 +3,6 @@ package kgarrison.doingsplits;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -33,8 +31,6 @@ public class GamesSearchActivity extends AppCompatActivity {
 
         ListView lv = (ListView) findViewById(R.id.games);
         List<Game> games = new ArrayList<>();
-        //games.add(new Game("Greendog: The Beached Surfer Dude!", "Sega Genesis"));
-        //games.add(new Game("VVVVVV", "PC"));
 
         ArrayAdapter<Game> gameAdapter = new ArrayAdapter<>(
                 this,
