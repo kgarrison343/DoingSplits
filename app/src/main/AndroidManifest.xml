@@ -34,5 +34,24 @@
         </activity>
         <activity android:name=".ViewCategoriesActivity" />
         <activity android:name=".LeaderboardActivity" />
+        <activity
+            android:name=".LeaderboardListActivity"
+            android:label="@string/title_leaderboard_list"
+            android:parentActivityName=".GamesSearchActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="kgarrison.doingsplits.GamesSearchActivity" />
+        </activity>
+        <activity
+            android:name=".LeaderboardDetailActivity"
+            android:label="@string/title_leaderboard_detail"
+            android:parentActivityName=".LeaderboardListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="kgarrison.doingsplits.LeaderboardListActivity" />
+        </activity>
     </application>
+
 </manifest>

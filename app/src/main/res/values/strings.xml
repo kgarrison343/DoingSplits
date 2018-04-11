@@ -10,4 +10,6 @@
     <string name="title_activity_games_search">GamesSearchActivity</string>
     <string name="action_settings">Settings</string>
     <string name="search_by_title">Search by title…</string>
+    <string name="title_leaderboard_list">Categories</string>
+    <string name="title_leaderboard_detail">Leaderboard Detail</string>
 </resources>

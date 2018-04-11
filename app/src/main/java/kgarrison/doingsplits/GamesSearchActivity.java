@@ -63,7 +63,7 @@ public class GamesSearchActivity extends AppCompatActivity {
     }
 
     private void openCategories(Game game){
-        Intent intent = new Intent(this, ViewCategoriesActivity.class);
+        Intent intent = new Intent(this, LeaderboardListActivity.class);
         intent.putExtra("SELECTED_GAME_ID", game.get_id());
         startActivity(intent);
     }
