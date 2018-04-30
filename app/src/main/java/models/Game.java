@@ -23,6 +23,10 @@ public class Game {
         _personalBest = new Time();
     }
 
+    public Game(com.garrison_enterprises.apiaccess.JsonModels.Game game) {
+        this(game.title, game.id, game.consoleName);
+    }
+
     public String get_name() {
         return _name;
     }
@@ -55,8 +59,11 @@ public class Game {
         this._id = _id;
     }
 
-    //TODO: Make to string work correctly
     public String toString(){
+        return _name + ": " + getConsolesToString() + " PB:" + _personalBest.toString();
+    }
+
+    public String getConsolesToString() {
         StringBuilder consoles = new StringBuilder();
 
         for (String console : _console) {
@@ -66,7 +73,7 @@ public class Game {
             consoles.delete(consoles.length() - 2, consoles.length() - 1);
         }
 
-        return _name + ": " + consoles.toString() + " PB:" + _personalBest.toString();
+        return consoles.toString();
     }
 
 

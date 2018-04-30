@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapters.LeaderboardsAdapter;
-import kgarrison.doingsplits.viewModels.LeaderboardContent;
 import loaders.CategoryLoader;
 import models.RunCategory;
 

@@ -1,6 +1,8 @@
 package kgarrison.doingsplits;
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,9 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import loaders.GameLoader;
 import models.Game;
 
-public class GamesSearchActivity extends AppCompatActivity {
+public class GamesSearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Game>> {
+
+    ArrayAdapter<Game> mAdapter;
+    String mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +38,13 @@ public class GamesSearchActivity extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.games);
         List<Game> games = new ArrayList<>();
 
-        ArrayAdapter<Game> gameAdapter = new ArrayAdapter<>(
+        mAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 games
         );
 
-        lv.setAdapter(gameAdapter);
+        lv.setAdapter(mAdapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,6 +66,7 @@ public class GamesSearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+        getLoaderManager().initLoader(0, null, this);
     }
 
     private void openCategories(Game game){
@@ -69,37 +76,25 @@ public class GamesSearchActivity extends AppCompatActivity {
     }
 
     private void getNewGame(String title) {
-
-        List<com.garrison_enterprises.apiaccess.JsonModels.Game> games = null;
-        try {
-            games = new FetchGamesTask().execute(title).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        assert games != null;
-        ListView lv = (ListView) findViewById(R.id.games);
-        List<Game> gamesList = new ArrayList<>();
-        for (com.garrison_enterprises.apiaccess.JsonModels.Game game : games){
-            Game newGame = new Game(game.title, game.id, game.consoleName);
-            gamesList.add(newGame);
-        }
-
-        lv.setAdapter(new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                gamesList
-        ));
+        mTitle = title;
+        getLoaderManager().restartLoader(0, null, this);
     }
 
-    private static class FetchGamesTask extends AsyncTask<String, Void, List<com.garrison_enterprises.apiaccess.JsonModels.Game>> {
+    @Override
+    public Loader<List<Game>> onCreateLoader(int id, Bundle args) {
+        return new GameLoader(this, mTitle);
+    }
 
-        @Override
-        protected List<com.garrison_enterprises.apiaccess.JsonModels.Game> doInBackground(String... titles) {
-            SpeedRunAccess access = new SpeedRunAccess();
-            return access.FetchGames(titles[0]);
-        }
+    @Override
+    public void onLoadFinished(Loader<List<Game>> loader, List<Game> data) {
+        mAdapter.clear();
+        mAdapter.addAll(data);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Game>> loader) {
+        mAdapter.clear();
+        mAdapter.notifyDataSetChanged();
     }
 }
